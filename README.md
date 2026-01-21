@@ -4,7 +4,7 @@ A personal portfolio website built with React, showcasing projects, skills, and 
 
 ## Demo
 
-🔗 **Live Demo:** 
+🔗 **Live Demo:** https://my-portfolio-phanie.vercel.app/
 
 ## Tech Stack
 - React – Component-based UI development
