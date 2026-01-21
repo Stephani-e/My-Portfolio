@@ -1,6 +1,6 @@
 import { Mail, MapPin, Phone, Send} from "lucide-react";
 import { FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa';
-import { cn } from "../lib/utils";
+import { cn } from "../Lib/utils.jsx";
 import { useToast } from "../Hooks/Use-Toast";
 import { useState } from "react";
 

@@ -1,6 +1,6 @@
 import { Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
-import { cn } from '@/Lib/utils';
+import { cn } from '../Lib/utils.jsx';
 
 
 export const ThemeToggle = () => {

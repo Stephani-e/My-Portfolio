@@ -1,7 +1,7 @@
 import { ThemeToggle } from "../Components/ThemeToggle"
-import { StarBackground } from '@/Components/StarBackground'
-import { Navbar } from '@/Components/NavBar'
-import { HeroSection } from '@/Components/HeroSection'
+import { StarBackground } from '../Components/StarBackground.jsx'
+import { Navbar } from '../Components/NavBar.jsx'
+import { HeroSection } from '../Components/HeroSection.jsx'
 import { AboutSection } from "../Components/AboutSection"
 import { SkillsSection } from "../Components/SkillsSection"
 import { ProjectsSection } from "../Components/ProjectsSection"
