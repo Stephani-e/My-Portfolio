@@ -30,22 +30,36 @@ A personal portfolio website built with React, showcasing projects, skills, and 
 - `src/`
     - `App.jsx`
     - `components/`
+        - `Data/`
+             - `ProjectsData.js`
         - `HeroSection.jsx`
         - `AboutSection.jsx`
         - `SkillsSection.jsx`
         - `ProjectsSection.jsx`
-        - `ContactSection.jsx`
+        - `ContactsSection.jsx`
+        - `Footer.jsx`
+        - `NavBar.jsx`
+        - `StarBackground.jsx`
+        - `ThemeToggle.jsx`
+    - `Hooks`
+         - `Use-Toast.jsx`
     - `Lib/`
         - `appwrite.js` (Appwrite client + IDs)
         - `utils.jsx`
-    - `index.css` / `tailwind.css`
+    - `Pages/`
+         - `Home.jsx`
+         - `NotFound.jsx`
+    - `App.jsx`
+    - `index.css`
+    - `main.jsx`
 
 ## Getting Started
 
 1. Clone the repository:
    ```bash
    https://github.com/Stephani-e/My-Portfolio.git
-   cd ToDo-List
+   cd My-Portfolio
+   
 2. Create an .env file in the project root:
    ```bash
    VITE_APPWRITE_ENDPOINT="https://fra.cloud.appwrite.io/v1"
