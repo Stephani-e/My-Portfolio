@@ -1,36 +1,55 @@
-import { useState } from "react";
-import { cn } from '@/Lib/utils';
+import {useEffect, useState} from "react";
+import { cn } from '../Lib/utils.jsx';
+import { databases, APPWRITE_DATABASE_ID, APPWRITE_SKILLS_ID } from "../Lib/appwrite.js";
 
-const skills = [
-    //Frontend
-    { name: 'HTML/CSS', level: 95, category: 'front-end', },
-    { name: "JavaScript", level: 90, category: "frontend" },
-    { name: "React", level: 90, category: "frontend" },
-    { name: "Tailwind CSS", level: 60, category: "frontend" },
-
-    // Design
-    { name: "Typography", level: 95, category: "design" },
-    { name: "Visual Design", level: 85, category: "design" },
-    { name: "Logo Design", level: 70, category: "design" },
-    { name: "Branding", level: 75, category: "design" },
-    { name: "UI/UX", level: 60, category: "design" },
-
-    // Tools
-    { name: "Git/GitHub", level: 90, category: "tools" },
-    { name: "Canva", level: 95, category: "tools" },
-    { name: "Figma", level: 85, category: "tools" },
-    { name: "Whimsical", level: 75, category: "tools" },
-    { name: "Protopie", level: 70, category: "tools" },
-    { name: "VS Code", level: 95, category: "tools" },
-];
-
-const categories = ["all", "frontend", "design", "tools"];
+const categories = ["all", "frontend", "design", "mobile", "cybersecurity", "tools"];
 
 export const SkillsSection = () => {
-
+    const [skills, setSkills] = useState([]);
     const [activeCategory, setActiveCategory] = useState("all");
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchSkills = async () => {
+            try {
+                const res = await databases.listDocuments(
+                    APPWRITE_DATABASE_ID,
+                    APPWRITE_SKILLS_ID,
+                    // [Query.equal('visible', true)]
+                );
+                console.log('skills res', res);   // <— add this
+                console.log('skills res', res);   // <— add this
+                // optionally sort by order if you set it
+                const docs = res.documents.sort((a, b) => (a.order || 0) - (b.order || 0));
+                setSkills(docs);
+            } catch (err) {
+                console.error('Error fetching skills', err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchSkills();
+    }, []);
+
     const filteredSkills = skills.filter(
-        (skill) => activeCategory === 'all' || skill.category === activeCategory);
+        (skill) =>
+            activeCategory === 'all' ||
+            skill.category === activeCategory
+    );
+
+    if (loading) {
+        return (
+            <section
+                id='skills'
+                className='py-24 px-4 relative bg-secondary/30 animate-pulse'
+            >
+                <div className='container mx-auto max-w-5xl text-center'>
+                    <p className= 'text-muted-foreground'> Loading Skills... </p>
+                </div>
+            </section>
+        );
+    }
 
     return (
         <section
@@ -50,21 +69,22 @@ export const SkillsSection = () => {
                                 onClick={() => setActiveCategory(category)}
                                 className={cn(
                                     "px-5 py-2 rounded-full transition-colors duration-300 capitalize",
-                                    activeCategory === category ? 'bg-primary text-primary-foreground' : 'bg-secondary/70 text-foreground hover:bd-secondary',
+                                    activeCategory === category
+                                        ? 'bg-primary text-primary-foreground'
+                                        : 'bg-secondary/70 text-foreground hover:bd-secondary',
                                 )}
                             >
                                 {category}
                             </button>
-                        )
-                        )
+                        ))
                     }
                 </div>
 
                 <div
                     className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {filteredSkills.map((skill, key) => (
+                    {filteredSkills.map((skill) => (
                         <div
-                            key={key}
+                            key={skill.$id}
                             className="bg-card p-6 rounded-lg shadow-xs card-hover">
                             <div className="text-left mb-4">
                                 <h3 className="font-semibold text-lg">{skill.name}</h3>
@@ -74,7 +94,7 @@ export const SkillsSection = () => {
                                 className="full bg-secondary/50 h-2 rounded-full overflow-hidden">
                                 <div
                                     className="bg-primary h-2 rounded-full origin-left animate-[grow_1.5s_ease-out"
-                                    style={{ width: skill.level + '%' }}
+                                    style={{ width: `${skill.level}%` }}
                                 />
                             </div>
 

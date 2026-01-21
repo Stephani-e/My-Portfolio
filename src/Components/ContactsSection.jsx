@@ -1,7 +1,7 @@
 import { Mail, MapPin, Phone, Send} from "lucide-react";
 import { FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa';
-import { cn } from "@/lib/utils";
-import { useToast } from "@/Hooks/Use-Toast";
+import { cn } from "../lib/utils";
+import { useToast } from "../Hooks/Use-Toast";
 import { useState } from "react";
 
 export const ContactSection = () => {
